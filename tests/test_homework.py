@@ -11,20 +11,13 @@ def test_01():
 
     # Test if the homework script runs without errors
     try:
-        for entry_point in ["elasticnet", "knn"]:
+        for model in ["elasticnet", "knn"]:
             subprocess.run(
-                [
-                    "mlflow",
-                    "run",
-                    "--env-manager=local",
-                    "-e",
-                    entry_point,
-                    ".",
-                ],
+                ["python3", "-m", "homework", "--model", model],
                 check=True,
             )
     except subprocess.CalledProcessError as e:
-        raise Exception(f"Error running the homework script: {e}")
+        raise Exception(f"Error running the homework script: {e}")	
 
     # Ensure the mlruns directory exists
     assert os.path.exists("my_mlruns"), "mlruns directory does not exist."
